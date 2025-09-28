@@ -1,6 +1,14 @@
 from typing import Dict, Any, List, TypedDict, Optional
 import datetime
 import random
+#<<<<<<< feat/nlp-and-ui-enhancements
+#import re
+#import spacy
+#import yaml
+#from dateutil.parser import parse
+#from transformers import pipeline
+#=======
+#>>>>>>> main
 
 # --- Data Structures for NLP Results ---
 
@@ -21,33 +29,102 @@ class NLPResult(TypedDict):
     es_relevante: bool
     confianza_relevancia: float
 
+#<<<<<<< feat/nlp-and-ui-enhancements
+# --- NLP Processor ---
+
+#class NlpProcessor:
+ #   """
+ #   An NLP processing module that uses transformer models for classification
+ #   and spaCy for entity extraction.
+ #   """
+ #   def __init__(self, catalog_path: str = "catalog.yml"):
+ #       """
+ #       Initializes the NLP processor, loading the required models.
+#
+#        Args:
+#            catalog_path: Path to the product catalog file.
+#        """
+#        print("Initializing NLP Processor...")
+
+        # 1. Load Intent Classification Model (Zero-Shot)
+        # We use a zero-shot model because it's flexible and doesn't require
+        # retraining to adjust the classification labels.
+#        print("Loading Zero-Shot Classification model...")
+#        self.classification_pipeline = pipeline(
+#            "zero-shot-classification",
+#            model="MoritzLaurer/mDeBERTa-v3-base-mnli-xnli"
+#        )
+#        print("Classification model loaded.")
+
+        # 2. Load Entity Extraction Model (spaCy)
+#        print("Loading spaCy model for NER...")
+#        self.nlp_ner = spacy.load("es_core_news_lg")
+#        print("spaCy model loaded.")
+
+#        self.intent_labels = [
+#            "Licitación o requerimiento público",
+#            "Cotización o solicitud de precios",
+#            "Notificación judicial o acción urgente",
+#            "Factura o documento de pago",
+#            "Consulta o reclamo de cliente",
+#            "Publicidad o boletín informativo",
+#            "Conversación interna o sin acción requerida"
+#        ]
+
+        # 3. Load Product Catalog
+#        self.product_catalog = []
+#        self.product_catalog_original_case = {} # Maps lowercase keyword to original name
+#        try:
+#            with open(catalog_path, 'r', encoding='utf-8') as f:
+#                catalog_data = yaml.safe_load(f)
+#                if 'productos' in catalog_data and isinstance(catalog_data['productos'], list):
+#                    for product_entry in catalog_data['productos']:
+#                        if 'nombre' in product_entry and 'sinonimos' in product_entry:
+#                            canonical_name = product_entry['nombre']
+                            # Add the canonical name itself as a keyword
+#                            self.product_catalog.append(canonical_name.lower())
+#                            self.product_catalog_original_case[canonical_name.lower()] = canonical_name
+                            # Add all synonyms
+#                            for synonym in product_entry['sinonimos']:
+#                                self.product_catalog.append(synonym.lower())
+#                                self.product_catalog_original_case[synonym.lower()] = canonical_name
+#                    print(f"Loaded {len(self.product_catalog)} product keywords from catalog.")
+#                else:
+#                    print(f"Warning: 'productos' key not found or not a list in '{catalog_path}'.")
+#        except FileNotFoundError:
+#            print(f"Warning: Product catalog '{catalog_path}' not found. Product matching will be disabled.")
+#        except Exception as e:
+#            print(f"Error loading catalog '{catalog_path}': {e}")
+
+#=======
 # --- NLP Processor Stub ---
 
-class NlpProcessor:
-    """
-    A stub for the NLP processing module.
+#class NlpProcessor:
+#    """
+#    A stub for the NLP processing module.
 
-    This class mimics the interface of the real NLP processor but returns
-    hardcoded dummy data. This allows for the development and testing of other
-    parts of the application without needing to load the actual (and heavy)
-    NLP models.
-    """
-    def __init__(self, catalog_path: str = "catalog.yml"):
-        """
-        Initializes the NLP processor stub.
+#    This class mimics the interface of the real NLP processor but returns
+#    hardcoded dummy data. This allows for the development and testing of other
+#    parts of the application without needing to load the actual (and heavy)
+#    NLP models.
+#   """
+#    def __init__(self, catalog_path: str = "catalog.yml"):
+#        """
+#        Initializes the NLP processor stub.
 
-        Args:
-            catalog_path: Path to the product catalog file (ignored by the stub).
-        """
-        print("Initializing NLP Processor STUB.")
+#        Args:
+#            catalog_path: Path to the product catalog file (ignored by the stub).
+#        """
+#        print("Initializing NLP Processor STUB.")
         # In the real implementation, this is where we would load models.
         # For the stub, we might load the catalog to make the dummy data
         # slightly more realistic.
-        self.dummy_products = ["Repuestos de tren de rodaje", "Sistemas Hidráulicos"]
-        self.dummy_entities = [
-            "Constructora XYZ", "Minera del Sur", "Gobierno Regional", "ACME Corp"
-        ]
+#        self.dummy_products = ["Repuestos de tren de rodaje", "Sistemas Hidráulicos"]
+#        self.dummy_entities = [
+#            "Constructora XYZ", "Minera del Sur", "Gobierno Regional", "ACME Corp"
+#        ]
 
+#>>>>>>> main
     def analyze(self, email_body: str) -> NLPResult:
         """
         Performs a full NLP analysis on the given email text.
@@ -60,14 +137,25 @@ class NlpProcessor:
         Returns:
             An NLPResult dictionary containing the analysis.
         """
+#<<<<<<< feat/nlp-and-ui-enhancements
+        # --- 1. Classify Intent ---
+#        clasificacion, confianza_clasificacion = self._classify_intent(email_body)
+
+        # --- 2. Extract Entities ---
+#        entidades = self._extract_entities(email_body)
+
+        # --- 3. Check Relevance (based on classification and entities) ---
+#        es_relevante, confianza_relevancia = self._check_relevance(clasificacion, entidades)
+#=======
         # --- 1. Classify Intent (Dummy) ---
-        clasificacion, confianza_clasificacion = self._classify_intent(email_body)
+#        clasificacion, confianza_clasificacion = self._classify_intent(email_body)
 
         # --- 2. Extract Entities (Dummy) ---
-        entidades = self._extract_entities(email_body)
+#        entidades = self._extract_entities(email_body)
 
         # --- 3. Check Relevance (Dummy) ---
-        es_relevante, confianza_relevancia = self._check_relevance(email_body)
+#        es_relevante, confianza_relevancia = self._check_relevance(email_body)
+#>>>>>>> main
 
         # --- 4. Generate Summary (Dummy) ---
         resumen = self._summarize(email_body, entidades)
@@ -82,46 +170,224 @@ class NlpProcessor:
         )
 
     def _classify_intent(self, text: str) -> (str, float):
-        """Dummy classification."""
+#<<<<<<< feat/nlp-and-ui-enhancements
+#        """
+#        Classifies the intent of the text using a zero-shot model.
+#        """
+        # Truncate text to avoid errors with very long emails
+#        truncated_text = text[:1024]
+
+        # Perform classification
+#        try:
+#            result = self.classification_pipeline(
+#                truncated_text,
+#                candidate_labels=self.intent_labels,
+#            )
+            # The result gives us a list of labels sorted by score
+#            top_result = result['labels'][0]
+#            confidence = round(float(result['scores'][0]), 4)
+#            return top_result, confidence
+#        except Exception as e:
+#            print(f"Error during classification: {e}")
+#            return "Error de Clasificación", 0.0
+
+#    def _extract_entities(self, text: str) -> ExtractedEntities:
+#        """
+#        Extracts entities from the text using spaCy for NER and regex for others.
+#        """
+#        doc = self.nlp_ner(text)
+
+        # --- Entity Extraction Logic ---
+#        entidad = self._find_organization(doc)
+#        contacto_email = self._find_email(text)
+#        productos = self._find_products(text)
+#        fecha_limite = self._find_deadline(text)
+#        monto = self._find_amount(text)
+
+ #       return ExtractedEntities(
+ #           entidad=entidad,
+ #           contacto_email=contacto_email,
+ #           productos=productos,
+ #           fecha_limite=fecha_limite,
+ #           monto=monto
+ #       )
+
+  #  def _find_organization(self, doc) -> Optional[str]:
+  #      """
+  #      Find the most likely organization name from spaCy entities.
+  #      This version is more robust against common misclassifications.
+  #      """
+  #      candidates = []
+        # Keywords that suggest a line is an organization, even if misclassified
+ #       org_keywords = ['constructora', 'minera', 'gobierno', 'corp', 's.a.', 'asociados']
+        # Common words that get misclassified as ORG
+ #       ignore_list = ['estimados', 'saludos', 'buenas tardes', 'gracias', 'repuestos', 'servicios']
+
+ #       for ent in doc.ents:
+ #           text = ent.text.strip()
+ #           text_lower = text.lower()
+
+            # Skip if the entity is in our ignore list
+  #          if text_lower in ignore_list:
+  #              continue
+
+            # Highest priority: ORG entities that are not ignored
+ #           if ent.label_ == "ORG":
+ #               candidates.append(text)
+
+            # Second priority: PER entities that might contain the org name
+ #           elif ent.label_ == "PER":
+                # If a person's name contains a newline, the org is often on the next line
+ #               if '\n' in text:
+ #                   parts = text.split('\n')
+                    # Often the last part is the company name
+ #                   potential_org = parts[-1].strip()
+ #                   candidates.append(potential_org)
+                # Also check if the person's name contains an org keyword
+ #               elif any(keyword in text_lower for keyword in org_keywords):
+ #                   candidates.append(text)
+
+            # Third priority: LOC entities that might be organizations
+ #           elif ent.label_ == "LOC":
+ #               if any(keyword in text_lower for keyword in org_keywords):
+ #                   candidates.append(text)
+
+        # From the candidates, prefer longer, more descriptive ones
+ #       if not candidates:
+ #           return None
+
+        # Sort by length, descending, to get the most descriptive candidate
+  #      candidates.sort(key=len, reverse=True)
+  #      return candidates[0]
+
+  #  def _find_email(self, text: str) -> Optional[str]:
+  #      """Find the first valid email address."""
+  #      match = re.search(r'[\w\.-]+@[\w\.-]+\.\w+', text)
+  #      return match.group(0) if match else None
+
+  #  def _find_products(self, text: str) -> List[str]:
+  #      """Find product keywords from the catalog in the text."""
+  #      found_products = set()
+  #      text_lower = text.lower()
+  #      for keyword in self.product_catalog:
+  #          if keyword in text_lower:
+                # Map the found keyword back to its canonical name
+  #              canonical_name = self.product_catalog_original_case[keyword]
+  #              found_products.add(canonical_name)
+  #      return list(found_products)
+
+  #  def _find_deadline(self, text: str) -> Optional[datetime.date]:
+  #      """Find a potential deadline date."""
+        # Regex for dates and keywords like "plazo", "fecha límite", "entrega"
+        # This is a simple approach; more advanced parsing could be used.
+  #      try:
+            # A very forgiving parser
+  #          match = parse(text, fuzzy=True, languages=['es'])
+  #          return match.date()
+  #      except (ValueError, TypeError):
+  #          return None
+
+  #  def _find_amount(self, text: str) -> Optional[float]:
+  #      """Find a monetary amount."""
+        # Regex for amounts like $1,234.56, 5.000 USD, 150.000, etc.
+        # This regex handles CLP and USD formats with/without symbols and decimals
+ #       pattern = r'[\$|USD]?\s*(\d{1,3}(?:[.,]\d{3})*(?:[.,]\d{1,2})?|\d+([.,]\d{1,2})?)\b'
+ #       match = re.search(pattern, text)
+ #       if match:
+ #           amount_str = match.group(1).replace('.', '').replace(',', '.')
+ #           try:
+ #               return float(amount_str)
+ #           except ValueError:
+ #               return None
+ #       return None
+
+ #   def _check_relevance(self, clasificacion: str, entidades: ExtractedEntities) -> (bool, float):
+ #       """
+ #       Relevance check based on classification and the presence of key entities.
+ #       """
+ #       relevant_categories = {
+ #           "Licitación o requerimiento público": {"requires": ["entidad"]},
+ #           "Cotización o solicitud de precios": {"requires": ["productos"]},
+ #           "Notificación judicial o acción urgente": {"requires": ["entidad"]},
+ #       }
+
+ #       if clasificacion not in relevant_categories:
+ #           return False, 0.90 # Not a relevant category
+
+        # Check if the required entities for this category are present
+ #       requirements = relevant_categories[clasificacion]["requires"]
+ #       for req in requirements:
+ #           if not entidades.get(req):
+                # e.g., It's a quotation, but no products were found.
+ #               return False, 0.85
+
+        # If we passed all checks, it's relevant
+  #      return True, 0.95
+
+   # def _summarize(self, text: str, entidades: ExtractedEntities) -> str:
+   #     """Generates a dynamic summary based on the extracted entities."""
+   #     entidad = entidades.get('entidad')
+   #     if not entidad:
+   #         return "No se pudo generar un resumen claro (no se identificó la entidad)."
+
+    #    summary = f"Oportunidad detectada de '{entidad}'"
+
+     #   productos = entidades.get('productos')
+      #  if productos:
+#            summary += f" para el suministro de {', '.join(productos)}"
+
+#        monto = entidades.get('monto')
+#        if monto:
+            # Format with comma as thousands separator and 2 decimal places
+ #           summary += f", por un monto aproximado de ${monto:,.2f}"
+
+#        fecha_limite = entidades.get('fecha_limite')
+#        if fecha_limite:
+#            summary += f", con fecha límite estimada el {fecha_limite.strftime('%Y-%m-%d')}"
+
+ #       return summary + "."
+#=======
+#        """Dummy classification."""
         # Simulate classification based on keywords
-        if "licitación" in text.lower() or "requerimiento" in text.lower():
-            return "Licitación/requerimiento público", random.uniform(0.85, 0.99)
-        if "cotización" in text.lower() or "precio" in text.lower():
-            return "Cotización directa", random.uniform(0.80, 0.95)
-        if "notificación judicial" in text.lower() or "urgente" in text.lower():
-            return "Notificaciones tipo judicial, accion urgente", random.uniform(0.90, 0.99)
+#        if "licitación" in text.lower() or "requerimiento" in text.lower():
+#            return "Licitación/requerimiento público", random.uniform(0.85, 0.99)
+#        if "cotización" in text.lower() or "precio" in text.lower():
+#            return "Cotización directa", random.uniform(0.80, 0.95)
+#        if "notificación judicial" in text.lower() or "urgente" in text.lower():
+#            return "Notificaciones tipo judicial, accion urgente", random.uniform(0.90, 0.99)
 
-        return "Informativo (sin acción)", random.uniform(0.60, 0.80)
+#        return "Informativo (sin acción)", random.uniform(0.60, 0.80)
 
-    def _extract_entities(self, text: str) -> ExtractedEntities:
-        """Dummy entity extraction."""
-        return {
-            "entidad": random.choice(self.dummy_entities),
-            "contacto_email": "contacto@" + random.choice(self.dummy_entities).lower().replace(" ", "") + ".com",
-            "productos": [random.choice(self.dummy_products)],
-            "fecha_limite": datetime.date.today() + datetime.timedelta(days=random.randint(15, 60)),
-            "monto": round(random.uniform(5000, 150000), 2)
-        }
+#    def _extract_entities(self, text: str) -> ExtractedEntities:
+#        """Dummy entity extraction."""
+#        return {
+#            "entidad": random.choice(self.dummy_entities),
+#            "contacto_email": "contacto@" + random.choice(self.dummy_entities).lower().replace(" ", "") + ".com",
+#            "productos": [random.choice(self.dummy_products)],
+#            "fecha_limite": datetime.date.today() + datetime.timedelta(days=random.randint(15, 60)),
+#            "monto": round(random.uniform(5000, 150000), 2)
+#        }
 
-    def _check_relevance(self, text: str) -> (bool, float):
-        """Dummy relevance check against the product catalog."""
+#    def _check_relevance(self, text: str) -> (bool, float):
+#        """Dummy relevance check against the product catalog."""
         # In a real scenario, this would use semantic search.
         # Here, we just pretend it's relevant if it's not "Informativo".
-        clasificacion, _ = self._classify_intent(text)
-        is_relevant = clasificacion != "Informativo (sin acción)"
-        confidence = random.uniform(0.8, 0.98) if is_relevant else random.uniform(0.3, 0.5)
-        return is_relevant, confidence
+#        clasificacion, _ = self._classify_intent(text)
+#        is_relevant = clasificacion != "Informativo (sin acción)"
+#        confidence = random.uniform(0.8, 0.98) if is_relevant else random.uniform(0.3, 0.5)
+#        return is_relevant, confidence
 
-    def _summarize(self, text: str, entidades: ExtractedEntities) -> str:
-        """Dummy summary generation."""
-        if not entidades.get("entidad"):
-            return "No se pudo generar un resumen."
+ #   def _summarize(self, text: str, entidades: ExtractedEntities) -> str:
+ #       """Dummy summary generation."""
+ #       if not entidades.get("entidad"):
+ #           return "No se pudo generar un resumen."
 
-        return (
-            f"Oportunidad detectada de {entidades['entidad']} para el suministro de "
-            f"{', '.join(entidades.get('productos', ['N/A']))}. "
-            f"Plazo estimado: {entidades.get('fecha_limite', 'no especificado')}."
-        )
+ #       return (
+ #           f"Oportunidad detectada de {entidades['entidad']} para el suministro de "
+#            f"{', '.join(entidades.get('productos', ['N/A']))}. "
+#            f"Plazo estimado: {entidades.get('fecha_limite', 'no especificado')}."
+#        )
+#>>>>>>> main
 
 if __name__ == '__main__':
     # Example of how to use the NLP Processor Stub
