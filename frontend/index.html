@@ -85,8 +85,11 @@
                     <th>Entity</th>
                     <th>Deadline</th>
                     <th>Status</th>
+#<<<<<<< feat/nlp-and-ui-enhancements
                     <th>Actions</th>
-                </tr>
+#=======
+#>>>>>>> main
+               </tr>
             </thead>
             <tbody>
                 <tr v-for="opp in opportunities" :key="opp.id">
@@ -98,10 +101,13 @@
                     <td>
                         <span :class="['status', 'status-' + opp.status]">{{ opp.status.replace('_', ' ') }}</span>
                     </td>
-                    <td>
-                        <button @click="updateStatus(opp.id, 'approved')" :disabled="opp.status === 'approved'">Approve</button>
-                        <button @click="updateStatus(opp.id, 'discarded')" :disabled="opp.status === 'discarded'">Discard</button>
-                    </td>
+#<<<<<<< feat/nlp-and-ui-enhancements
+#                    <td>
+#                        <button @click="updateStatus(opp.id, 'approved')" :disabled="opp.status === 'approved'">Approve</button>
+#                        <button @click="updateStatus(opp.id, 'discarded')" :disabled="opp.status === 'discarded'">Discard</button>
+#                    </td>
+#=======
+#>>>>>>> main
                 </tr>
             </tbody>
         </table>
@@ -140,25 +146,28 @@
                 } finally {
                     this.loading = false;
                 }
+#<<<<<<< feat/nlp-and-ui-enhancements
             },
-            async updateStatus(id, newStatus) {
-                try {
-                    const response = await fetch(`/api/v1/opportunities/${id}/status?new_status=${newStatus}`, {
-                        method: 'PATCH',
-                    });
-                    if (!response.ok) {
-                        throw new Error(`Failed to update status. Server responded with ${response.status}`);
-                    }
-                    // Find the opportunity and update its status locally
-                    const opp = this.opportunities.find(o => o.id === id);
-                    if (opp) {
-                        opp.status = newStatus;
-                    }
-                } catch (e) {
-                    // Display a more user-friendly error
-                    alert(`Error updating opportunity: ${e.message}`);
-                    console.error(e);
-                }
+#            async updateStatus(id, newStatus) {
+#                try {
+#                    const response = await fetch(`/api/v1/opportunities/${id}/status?new_status=${newStatus}`, {
+#                        method: 'PATCH',
+#                    });
+#                    if (!response.ok) {
+#                        throw new Error(`Failed to update status. Server responded with ${response.status}`);
+#                    }
+#                    // Find the opportunity and update its status locally
+#                    const opp = this.opportunities.find(o => o.id === id);
+#                    if (opp) {
+#                        opp.status = newStatus;
+#                    }
+#                } catch (e) {
+#                    // Display a more user-friendly error
+#                    alert(`Error updating opportunity: ${e.message}`);
+#                    console.error(e);
+#                }
+#=======
+#>>>>>>> main
             }
         },
         mounted() {
