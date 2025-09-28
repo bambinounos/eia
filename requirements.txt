@@ -1,0 +1,34 @@
+# Backend Framework
+fastapi
+uvicorn[standard]
+gunicorn
+
+# NLP
+transformers
+spacy
+torch
+beautifulsoup4
+lxml
+
+# Database
+sqlalchemy
+psycopg2-binary
+
+# Task Queue
+celery
+redis
+
+# Email
+imapclient
+
+# Configuration and CLI
+python-dotenv
+pyyaml
+click
+pydantic
+
+# Calendar
+icalendar
+
+# API Client for Telegram
+python-telegram-bot

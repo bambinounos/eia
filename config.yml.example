@@ -1,0 +1,65 @@
+# Email Intelligence Analyzer (EIA) - Configuration File
+# ---------------------------------------------------------
+# Copy this file to config.yml and fill in your details.
+# IMPORTANT: DO NOT commit config.yml to version control.
+
+# Email accounts to monitor
+# You can add multiple accounts to this list.
+email_accounts:
+  - email: "your_email@example.com"
+    password: "your_email_password" # Or app-specific password for services like Gmail
+    imap_server: "imap.example.com"
+    imap_port: 993
+    use_ssl: true
+    # Folders to scan for opportunities. "INBOX" is the default.
+    folders_to_scan:
+      - "INBOX"
+      - "Sent"
+
+# IMAP settings
+imap:
+  # How often to scan for new emails, in minutes.
+  scan_interval_minutes: 10
+  # Mark emails as "seen" after processing to avoid re-processing.
+  mark_as_seen: true
+
+# Database connection (PostgreSQL)
+database:
+  url: "postgresql://user:password@localhost/eia_db"
+
+# Redis connection (for Celery task queue)
+redis:
+  url: "redis://localhost:6379/0"
+
+# NLP Model Settings
+nlp:
+  # Models for classification and entity recognition.
+  # Using smaller, distilled models for faster inference.
+  classification_model: "mrm8488/distilbert-base-spanish-uncased-finetuned-spa-squad2-es"
+  ner_model: "es_core_news_lg"
+  summarization_model: "Josue-DL/t5-base-spanish-summarization"
+  # Threshold for semantic matching against the product catalog.
+  # Value between 0 and 1. Higher is stricter.
+  similarity_threshold: 0.75
+
+# Product Catalog
+# Define products and synonyms to look for in emails.
+# This can also be a path to an external YAML or JSON file.
+product_catalog_path: "catalog.yml"
+
+# Alerting and Notifications
+alerts:
+  # Send an email summary of new opportunities.
+  send_email_notifications: true
+  notification_email_recipient: "your_internal_email@example.com"
+
+  # Telegram Bot API for notifications
+  telegram:
+    enabled: false
+    bot_token: "YOUR_TELEGRAM_BOT_TOKEN"
+    chat_id: "YOUR_TELEGRAM_CHAT_ID"
+
+# Web Interface Settings
+server:
+  host: "127.0.0.1"
+  port: 8000

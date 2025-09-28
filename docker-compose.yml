@@ -1,0 +1,68 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  db:
+    image: postgres:13-alpine
+    container_name: eia_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=eia_db
+    ports:
+      # Expose port 5432 to the host for debugging, but it's not needed for inter-container communication
+      - "5432:5432"
+    restart: unless-stopped
+
+  # Redis for Celery Broker and Backend
+  redis:
+    image: redis:6-alpine
+    container_name: eia_redis
+    restart: unless-stopped
+
+  # FastAPI Backend Application
+  backend:
+    build: .
+    container_name: eia_backend
+    command: gunicorn -k uvicorn.workers.UvicornWorker -w 4 -b 0.0.0.0:8000 eia.main:app
+    volumes:
+      - ./config.yml:/app/config.yml
+      - ./catalog.yml:/app/catalog.yml
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      - redis
+    restart: unless-stopped
+
+  # Celery Worker
+  worker:
+    build: .
+    container_name: eia_worker
+    command: celery -A eia.worker.celery_app worker --loglevel=info
+    volumes:
+      - ./config.yml:/app/config.yml
+      - ./catalog.yml:/app/catalog.yml
+    depends_on:
+      - redis
+      - db
+    restart: unless-stopped
+
+  # Celery Beat Scheduler
+  beat:
+    build: .
+    container_name: eia_beat
+    command: celery -A eia.worker.celery_app beat --loglevel=info
+    volumes:
+      - ./config.yml:/app/config.yml
+      - ./catalog.yml:/app/catalog.yml
+    depends_on:
+      - redis
+      - db
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+    driver: local

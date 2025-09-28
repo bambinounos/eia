@@ -1,0 +1,57 @@
+# Product and Service Catalog for EIA
+# ------------------------------------
+# This file defines the products, services, and keywords that the Email
+# Intelligence Analyzer will look for in emails to identify opportunities.
+
+# Each top-level item is a product category.
+# - "nombre": The canonical name of the product or service.
+# - "sinonimos": A list of keywords, synonyms, and related terms.
+#   The NLP model will use these (and semantic similarity) to match
+#   mentions in emails to this product.
+
+productos:
+  - nombre: "Repuestos de tren de rodaje"
+    sinonimos:
+      - "Cadenas"
+      - "Orugas"
+      - "Rodillos"
+      - "Ruedas guias"
+      - "Sprocket"
+      - "Catalinas"
+      - "Zapatas"
+      - "Pernos de zapata"
+      - "Repuestos de excavadora"
+      - "Componentes de tren de rodaje"
+      - "Tren de rodamiento"
+
+  - nombre: "Sistemas Hidráulicos"
+    sinonimos:
+      - "Bombas hidráulicas"
+      - "Válvulas hidráulicas"
+      - "Cilindros hidráulicos"
+      - "Mangueras hidráulicas"
+      - "Sistemas de fluido"
+
+  - nombre: "Camiones y Vehículos de Carga"
+    sinonimos:
+      - "Camión"
+      - "Vehículo de carga"
+      - "Tractocamión"
+      - "Flota de camiones"
+
+  - nombre: "Servicios de Mantenimiento"
+    sinonimos:
+      - "Mantenimiento preventivo"
+      - "Reparación de maquinaria"
+      - "Servicio técnico"
+      - "Inspección de equipos"
+
+  - nombre: "Licitaciones Públicas"
+    sinonimos:
+      - "Licitación"
+      - "Concurso público"
+      - "Adquisición pública"
+      - "Contratación del estado"
+      - "Base de licitación"
+      - "RFP" # Request for Proposal
+      - "RFQ" # Request for Quotation
